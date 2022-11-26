@@ -63,7 +63,7 @@ u32 user_id(){
 }
 
 
-int admin(){
+void admin(){
 	
 	
 	int c=0; //counter
