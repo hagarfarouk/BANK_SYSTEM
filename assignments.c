@@ -160,6 +160,69 @@ void main (){
 	
 }
 
+ //// ***********assignments of lecture 6 *************///////////////
+ /////////// assignment 1 bubble sorting ///////////
+  #include <stdio.h>
+ void main (){ int tmp =0;
+	 int arr[5];
+	 for (int i=0; i<5; i++)
+	 {
+		 printf("enter number %d  ",i+1);
+		 scanf("%d",&arr[i]);
+		 
+	 }
+	 for (int i=0; i<5;i++)
+	 {
+		 for (int j=1; j<5-i;j++)
+		 {
+			 if (arr[j]<arr[j-1])
+			 {
+				 tmp = arr[j];
+				 arr[j]= arr[j-1];
+				 arr[j-1]= tmp;
+			 }
+		 }
+	 }
+ 
+ for (int i=0; i<5; i++)
+	 printf("number %d = %d  \n",i+1, arr[i]);
+
+ }
+
+
+ 
+ 
+ /////// assignment 2 ///////////
+ #include <stdio.h>
+ void main(){
+	 int x =0 ,y=1 ,z=2;
+	 int *p=&x , *q=&y, *r=&z;
+	 printf("%d \n", x);
+	 printf("%d \n", y);
+	 printf("%d \n", z);
+	 printf("%d \n", p);
+	 printf("%d \n", q);
+	 printf("%d \n", r);
+	 printf("%d \n", *p);
+	 printf("%d \n", *q);
+	 printf("%d \n", *r);
+	 printf("swapping pointers: \n ");
+	 r = p;
+	 p=q;
+	 q=r;
+	 printf("%d \n", x);
+	 printf("%d \n", y);
+	 printf("%d \n", z);
+	 printf("%d \n", p);
+	 printf("%d \n", q);
+	 printf("%d \n", r);
+	 printf("%d \n", *p);
+	 printf("%d \n", *q);
+	 printf("%d \n", *r);
+	 
+	 
+ }
+
 
 //// ***********assignments of linkedlist *************///////////////
 
