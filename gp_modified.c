@@ -26,7 +26,7 @@ struct Node{
 	char *status;
 	u32 id;
 	char na_id[15];
-	char grd_id[15];
+	char grd_id[15]={0};
 	char *name;
 	char* address;
 	u8 age;
@@ -37,8 +37,8 @@ struct Node{
 Node *first = Null;
 Node *last = Null;
 
-u32 Admin_pw = 9999;
-u32 user_id(){
+u32 Admin_pw = 9999;   //admin password
+u32 user_id(){             // to get account id from user
 	int found; int n=0;
 	u32 id=0;
 	printf("Please Enter Account ID: ");
@@ -60,7 +60,7 @@ u32 user_id(){
 }
 
 
-void admin(){
+void admin(){                     
 	
 	
 	int c=0; //counter
@@ -92,9 +92,9 @@ void admin(){
 	}
 	
  
- if (x==1){
+ if (x==1){       									// entering user information
 		char name[200]; char address[200];
-		u8 age; char national_id[15]; char * status; u32 cash;  char gid[15];
+		u8 age; char national_id[15]; char * status; u32 cash;  char gid[15]={0};
 		printf("Enter Full Name: ");
 		   fflush(stdin);
 		scanf("%[^\n]%*c", name);
@@ -108,7 +108,7 @@ void admin(){
 		int counter =0; int id_flag=0;
 		printf("Enter National ID: ");
 		scanf("%s",&national_id);
-		while (counter<3 && id_flag<1)
+		while (counter<3 && id_flag<1)      // checking id 
 		{
 			if (strlen(national_id)!=14)
 		{
@@ -124,14 +124,14 @@ void admin(){
 			printf("\n\t\t\t you can't create account without National ID");
 			continue;
 		}
-		if (age<21)
+		if (age<21)      // entering guardian id 
 		{
 			 int gcounter =0; int gid_flag=0;
 			printf("Enter Guardian National ID: \n");
 
 			
 	 		scanf("%s",&gid);
-	 		while (gcounter<3 && gid_flag<1)
+	 		while (gcounter<3 && gid_flag<1)     //checking guardian id
 	 		{
 	 			if (strlen(gid)!=14)
 	 		{
@@ -151,7 +151,7 @@ void admin(){
 	 
 
 		}
-		printf("How Much Money For Deposit: ");
+		printf("How Much Money For Deposit: ");  
 		scanf("%d",&cash);
 		printf("\n");
 		 //char *name = "hagar farouk";
@@ -161,7 +161,7 @@ void admin(){
 			// scanf("%d", &g_id);
 		// }
 
-		create(name,address,age,cash,national_id,gid);
+		create(name,address,age,cash,national_id,gid);     //calling creat function to store data in bank database
 		
 		printf("Congratulations! Your Account is Created Succsessfully  ");
 
@@ -172,9 +172,9 @@ void admin(){
 	
 	if (x==2)
 	{   u32 id;
-		printf("Enter Your ID: ");
+		printf("Enter Your ID: ");     //storing client's id to be ready for any process
 		id = user_id();	
-		if (id==0)
+		if (id==0)    //if user id isn't valid , it will skip all processes and go out from this window
 		continue;
 		int y=0;
 		printf("For Making Transaction, Plesae Press 1:\n ");
@@ -189,7 +189,7 @@ void admin(){
 			printf("How Much You Want for Transaction: \n");
 			scanf("%d",&m);
 			tran_id = user_id();
-			balance = find_balance(id);    ////////
+			balance = find_balance(id);    ////////checking balance before completing the process
 			if (balance<m)
 			  continue;
 			
@@ -214,12 +214,12 @@ void admin(){
 			u32 cash; u32 balance=0;
 			printf("Enter amount of cash: \n");
 			scanf("%d",&cash);
-			balance = find_balance(id);
+			balance = find_balance(id);    //checking balance before process
 			if (balance < cash);
 			{ printf("\n\t\t\t Sorry , Not Enough Balance \n");
 			  continue;
 			}
-			update_balance(id,cash,'n');
+			update_balance(id,cash,'n');  //n for negtive , it will subtract amount of cash from balance
 			
 			
 		}
@@ -228,7 +228,7 @@ void admin(){
 			u32 depo=0;
 			printf("Enter Amount of cash you want to add in this account: ");
 			scanf("%f",&depo);
-			update_balance(id,depo, 'p');
+			update_balance(id,depo, 'p');  //p for positive , it will add amount of cash to balance
 			
 		}
 	}
@@ -238,13 +238,13 @@ void admin(){
 
 void client(){
 	u32 id=0; int t =1;
-		printf("Please Enter Your ID: ");
+		printf("Please Enter Your ID: ");   //entering id before any process
 	id = user_id();	
-		if (id==0) t=0;
-	if (t==1)  printf("\n\t\t\t\t Welcome To ITI Bank\n");
+		if (id==0) t=0; 
+	//if (t==1) 
  while(t) 
   {	
-	
+	 printf("\n\t\t\t\t Welcome To ITI Bank\n");
 		
 	int y=0;
 		printf("For Making Transaction, Plesae Press 1:\n ");
@@ -259,16 +259,16 @@ void client(){
 			printf("Enter ID You Want To Transfer To it: \n");
 			tran_id = user_id();
 				if (tran_id==0)
-		            continue;
+		            continue;    //if id of other user isn't valid , it will skip all 
 			//Printf ("Enter Amount of Money Needed: \n");
 			scanf("%d", &m);
-			balance = find_balance(id);
-			if (balance<m)
+			balance = find_balance(id);    //get balance and check it
+			if (balance<m)  
 			{ printf("Sorry , Not Enough Balance \n");
 				continue;
 			 }
-			update_balance( id,m,'n');
-		 update_balance(tran_id,m,'p');
+			update_balance( id,m,'n');   //n for subtacting amount of cash from the cleint
+		 update_balance(tran_id,m,'p');	 // p for adding amount of cash to other account and update both of them 
 		
 		}
 		if (y==2)
@@ -306,7 +306,7 @@ void client(){
 		if(y==0)
 		{
 			printf("\n\t\t\t\t\t HAVE A NICE DAY! \t\t Thank You ");
-			break;
+			break;   						 // break the while loop 
 			
 		}
   }
@@ -321,6 +321,7 @@ void main(){
 	printf("\n\t\t\t\t Welcome To ITI Bank\n");
 	printf("If you are one of our team Please Press 1: \n");
 	printf("If You are One of our Custmers Please Press 2: \n");
+	printf("If You are One of our Custmers Please Press 0: \n");
 	scanf("%d",&x);
 	if (x==1)
 		admin();
@@ -332,10 +333,10 @@ void main(){
 
 void create(char* n, char* _address , u8 old , u32 value, char* national_id , char* gid )
 {
-	srand(time(NULL)); 
-	Node *New = (Node*)malloc(sizeof(Node));
+	srand(time(NULL));   
+	Node *New = (Node*)malloc(sizeof(Node));      
 	New->data = value;
-	for (int i=0; i<15; i++)
+	for (int i=0; i<15; i++)     // to fill national id and guardian id
 	{
 		New->grd_id[i] = *(gid+i);
 		New->na_id[i] = *(national_id+i);
@@ -345,13 +346,13 @@ void create(char* n, char* _address , u8 old , u32 value, char* national_id , ch
 	New->status = "Active";
 	New->name = n; 
 	New->address = _address;
-	New->id = rand();
-	New->pw = (rand() % (100-0+1));
+	New->id = rand();     //for randam account id
+	New->pw = (rand() % (100-0+1));   //for randam account password
 	New->Prev = Null;
 	New->Next = Null;
 	printf("Your Bank ID is:%d \n", New->id);
 	//printf("Your national ID is %d \n",New->na_id);
-	add(New);
+	add(New);    //adding node to database
 	
 	//return New;
 }
@@ -395,7 +396,7 @@ void create(char* n, char* _address , u8 old , u32 value, char* national_id , ch
 	// }*/
 // }
 
-Node *search(u32 value){
+Node *search(u32 value){    //searching for address of any required id in all nodes
 	Node *search = first;
 	while(search!=Null){
 		if(search->id == value){
@@ -406,7 +407,7 @@ Node *search(u32 value){
 	}
 	return Null;	
 }
-void update_status(u32 _id,int st)
+void update_status(u32 _id,int st)       //change status of any account 
 {
 	Node * ptr= search(_id);
 	if ( st == 1)
@@ -418,7 +419,7 @@ void update_status(u32 _id,int st)
 	else
 		ptr->status = "Closed";
 }
- void update_balance(u32 _id ,u32 cash ,char x ){
+ void update_balance(u32 _id ,u32 cash ,char x ){     //adding or subtracting the amount of money in any given account
 	 Node * ptr = search(_id);
 	 if (x == 'n' )
 		 ptr->data -= cash;
@@ -426,19 +427,19 @@ void update_status(u32 _id,int st)
 	 printf("%s's", ptr->name);
 	 printf(" balance is now: %d \n", ptr->data);
  }
- void update_pw(u32 _id,u32 password){
+ void update_pw(u32 _id,u32 password){           //changing password
 	  Node * ptr = search(_id);
 	  ptr->pw = password;
 	 
  }
  
- int find_id(u32 _id){
+ int find_id(u32 _id){         //searching a given id if exists or not
 	 Node * ptr = search(_id);
 	 if (ptr!=NULL)
 		 return 1;
 	 return 0;
  }
- int find_balance(u32 _id){
+ int find_balance(u32 _id){          //return amount of money at a given account
 	  Node * ptr = search(_id);
 	  return ptr->data;
 	 
