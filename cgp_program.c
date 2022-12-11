@@ -11,7 +11,7 @@ struct Node{
 	char *status;
 	u32 id;
 	char na_id[15];
-	char grd_id[15]={0};
+	char grd_id[15];
 	char *name;
 	char* address;
 	u8 age;
