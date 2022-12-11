@@ -26,7 +26,7 @@ struct Node{
 	char *status;
 	u32 id;
 	char na_id[15];
-	char grd_id[15]={0};
+	char grd_id[15];
 	char *name;
 	char* address;
 	u8 age;
@@ -112,7 +112,7 @@ void admin(){
 		{
 			if (strlen(national_id)!=14)
 		{
-			printf("incorret national id , please try again");
+			printf("incorret national id , please try again:  ");
 			scanf("%s",national_id);
 			counter++;
 
@@ -127,7 +127,7 @@ void admin(){
 		if (age<21)      // entering guardian id 
 		{
 			 int gcounter =0; int gid_flag=0;
-			printf("Enter Guardian National ID: \n");
+			printf("Enter Guardian National ID: ");
 
 			
 	 		scanf("%s",&gid);
@@ -135,7 +135,7 @@ void admin(){
 	 		{
 	 			if (strlen(gid)!=14)
 	 		{
-	 			printf("incorret national id , please try again");
+	 			printf("incorret national id , please try again:  ");
 	 			scanf("%s",gid);
 	 			gcounter++;
 
